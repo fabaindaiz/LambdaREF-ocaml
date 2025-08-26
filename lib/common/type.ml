@@ -3,25 +3,41 @@ open Env
 
 exception TypeError of string
 
-type ttype = 
+type base_type =
   | TUnit
-  | TArrow of ttype *  ttype
+  | TBool
+
+type ttype = 
+  | TBase of base_type
+  | TArrow of ttype * ttype
+  | TRef of ttype
+
+let string_of_base_type =
+  function
+  | TUnit -> "Unit"
+  | TBool -> "Bool"
 
 let rec string_of_ttype =
   function
-  | TUnit -> "Unit"
+  | TBase b -> string_of_base_type b
   | TArrow (a, b) -> sprintf "(%s -> %s)" (string_of_ttype a) (string_of_ttype b)
+  | TRef r -> sprintf "(ref %s)" (string_of_ttype r)
 
 type const =
   | Unit
+  | True
+  | False
 
 let string_of_const =
   function
   | Unit -> "unit"
+  | True -> "true"
+  | False -> "false"
 
 let const_typing =
   function
   | Unit -> TUnit
+  | True | False -> TBool
 
 type tenv = ttype env
 

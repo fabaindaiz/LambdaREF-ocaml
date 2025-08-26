@@ -1,4 +1,4 @@
 (executable
  (public_name template)
  (name main)
- (libraries common parsing driver containers))
+ (libraries containers))
