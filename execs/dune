@@ -1,0 +1,3 @@
+(executables
+ (names run_parse run_compile run_interp)
+ (libraries common parsing driver alcotest containers))
