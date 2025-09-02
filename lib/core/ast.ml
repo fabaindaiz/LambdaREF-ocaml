@@ -1,15 +1,25 @@
 open Printf
 open Common.Type
+open Common.Evidence
 
-type core =
+type gcore_sval =
   | Var of string
+  | Loc of string * gtype
   | Const of const
-  | Abs of string * ttype * core
-  | App of core * core
+  | Abs of string * gtype * gcore
 
-let rec string_of_core =
-  function
-  | Var s -> s
-  | Const k -> string_of_const k
-  | Abs (x, a, n) -> sprintf "(λ %s:%s.%s)" x (string_of_ttype a) (string_of_core n)
-  | App (l, m) -> sprintf "(%s %s)" (string_of_core l) (string_of_core m)
+and gcore_val =
+  | Simple of gcore_sval
+  | SAnnot of ev * gcore_sval * gtype
+
+and gcore_et =
+  | Et of ev * gcore
+
+and gcore =
+  | Value of gcore_val
+  | App of gtype * gcore_et * gcore_et
+  | If of gcore_et * gcore_et * gcore_et
+  | Annot of gcore_et * gtype
+  | Ref of  gtype * gcore_et
+  | Deref of gtype * gcore_et
+  | Asgn of gtype * gcore_et * gcore_et

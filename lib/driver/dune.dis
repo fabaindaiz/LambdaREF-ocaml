@@ -1,4 +1,4 @@
 (library
  (name driver)
  (modules compile interp)
- (libraries common core surface))
+ (libraries common surface gsurface))

@@ -18,6 +18,9 @@ teste:
 parse:
 	dune exec execs/run_parse.exe $(src)
 
+type:
+	dune exec execs/run_type.exe $(src)
+
 compile:
 	dune exec execs/run_compile.exe $(src)
 

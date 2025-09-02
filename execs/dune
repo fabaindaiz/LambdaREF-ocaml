@@ -1,0 +1,3 @@
+(executables
+ (names run_parse run_type)
+ (libraries common parsing alcotest containers))

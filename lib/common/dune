@@ -1,4 +1,4 @@
 (library
  (name common)
- (modules env type utils)
+ (modules env type lattice evidence utils)
  (libraries containers))
